@@ -33,6 +33,12 @@ install dependencies:
 $ composer install
 ```
 
+## Configuration
+Copy the .env.example file and rename it to .env  
+```bash
+  cp .env.example .env
+```
+
 ## Generate App Key
 Generate the application key using the following command:
 ```bash
