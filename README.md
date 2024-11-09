@@ -61,9 +61,11 @@ $ php artisan serve
 
 ## Install VueJS and start server
 
+Open another terminal and go to the laravel-vue-app (root) directory
+
 Go to frontend directory
 ```bash
-  cd ../frontend
+  cd frontend
 ```
 
 ```bash
