@@ -21,7 +21,7 @@ import { useToast } from '@/components/ui/toast/use-toast'
 
 const { toast } = useToast()
 const taskStore = useTaskStore()
-const { tasks, completedTasks, pendingTasks, error, getAllCount, getCompletedCount, getPendingCount } = storeToRefs(taskStore)
+const { allTasks, completedTasks, pendingTasks, error, getAllCount, getCompletedCount, getPendingCount, sortedTask } = storeToRefs(taskStore)
 
 async function onDelete(id: number) {
   await taskStore.deleteTask(id)
@@ -83,7 +83,7 @@ async function markAsPending(id: number) {
         </CardHeader>
         <CardContent class="space-y-2">
           <div class="flex flex-col gap-4 w-full">
-            <Task v-for="task in tasks" :key="task.id" :task="task" :onDelete="onDelete" :onComplete="markAsCompleted" :onPending="markAsPending" />
+            <Task v-for="task in sortedTask(allTasks, 'desc')" :key="task.id" :task="task" :onDelete="onDelete" :onComplete="markAsCompleted" :onPending="markAsPending" />
           </div>
         </CardContent>
       </Card>

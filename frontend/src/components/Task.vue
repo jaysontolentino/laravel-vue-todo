@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTaskStore, type Task } from '@/stores/taskStore'
 import { storeToRefs } from 'pinia'
+import moment from 'moment'
 import { ref } from 'vue'
 import {
     Card,
@@ -58,7 +59,7 @@ function saveCallback() {
 <template>
     <Card>
         <CardHeader class="flex flex-row justify-between">
-            <CardTitle class="text-sky-700">{{ task.title }}</CardTitle>
+            <CardTitle class="text-sky-700" :class="{'line-through': task.completed}">{{ task.title }}</CardTitle>
 
             <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -84,15 +85,19 @@ function saveCallback() {
             </DropdownMenu>
         </CardHeader>
 
-        <CardContent class="space-y-2">
+        <CardContent class="space-y-2" :class="{'line-through': task.completed}">
             {{ task.description }}
         </CardContent>
 
-        <CardFooter>
+        <CardFooter class="flex justify-between">
             <span class="text-xs font-bold flex gap-2 ">
                 <span class=" text-slate-600">Status:</span>
                 <span v-if="task.completed" class="text-green-500">Completed</span>
                 <span v-else class="text-orange-500">Pending</span>
+            </span>
+
+            <span class="text-sm text-slate-600">
+                {{ moment(task.created_at).format('LL') }}
             </span>
         </CardFooter>
     </Card>
